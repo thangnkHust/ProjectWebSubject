@@ -37,12 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function users(){
+    public function questions(){
         return $this->hasMany(Question::class);
     }
 
-    public function addTitle($value){
-        $this->attributes['title'] = $value;
-        $this->attributes['slug'] = str_slug($value);
-    }
 }
