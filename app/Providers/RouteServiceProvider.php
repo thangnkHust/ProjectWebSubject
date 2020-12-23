@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
             return Question::where('slug', $slug)->first() ?? \abort(404);
         });
 
-        parent::boot();git 
+        parent::boot();
     }
 
     /**

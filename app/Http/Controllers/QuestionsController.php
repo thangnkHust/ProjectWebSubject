@@ -46,7 +46,7 @@ class QuestionsController extends Controller
         // $question->body = $request->body;   
         // $question->save();
         $request->user()->questions()->create($request->only('title', 'body'));
-        // return \redirect()->route('questions.index')->with('success', 'Your question has been submitted');
+        return \redirect()->route('questions.index')->with('success', 'Your question has been submitted');
     }
 
     /**
@@ -104,5 +104,10 @@ class QuestionsController extends Controller
         }
         $question->delete();
         return \redirect('/questions')->with('success', 'Your question has been deleted');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
 }
