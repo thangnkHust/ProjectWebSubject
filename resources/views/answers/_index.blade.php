@@ -25,6 +25,7 @@
             </div>
             <div class="media-body">
               {!! $answer->body !!}
+              
               <div class="float-right mt-3">
                 <span class="text-muted">Answered {{ $answer->created_date }}</span>
                 <div class="media mt-2">
