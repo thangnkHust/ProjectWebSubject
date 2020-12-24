@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Eloquent\Factory;
 
 class DatabaseSeeder extends Seeder
 {
