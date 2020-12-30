@@ -14,8 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/token', 'Auth\LoginController@getToken');
+Route::get('/questions', 'Api\QuestionsController@index');
 
-Route::resource('questions', 'QuestionsController');
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
+Route::middleware(['auth:api'])->group(function() {
+    Route::get('/user', function(Request $request){
+        return $request->user();
+    });
+    Route::apiResource('/questions', 'Api\QuestionsController')->except('index');
+});
