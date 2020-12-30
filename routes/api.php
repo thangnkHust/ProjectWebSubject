@@ -21,6 +21,7 @@ Route::get('/questions', 'Api\QuestionsController@index');
 //     return $request->user();
 // });
 
+Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
 Route::middleware(['auth:api'])->group(function() {
     Route::get('/user', function(Request $request){
         return $request->user();
