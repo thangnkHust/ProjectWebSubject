@@ -51,6 +51,7 @@ class LoginController extends Controller
         ]);
 
         $requestToken = Request::create(env('APP_URL') . '/oauth/token', 'post');
-        return Route::dispatch($requestToken);
+        $response = Route::dispatch($requestToken);
+        return $response;
     }
 }
