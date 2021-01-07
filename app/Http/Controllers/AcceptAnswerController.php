@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Answer;
+use Illuminate\Support\Facades\Gate;
 
 class AcceptAnswerController extends Controller
 {
@@ -12,8 +14,12 @@ class AcceptAnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
-    {
-        //
+    public function __invoke(Answer $answer)
+    {   
+        if(Gate::denies('accept', $answer)){
+            \abort(403, "Access denied");
+        }
+        $answer->question->acceptBestAnswer($answer);
+        return back();
     }
 }
