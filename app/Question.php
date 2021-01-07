@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Question extends Model
 {
@@ -44,6 +45,21 @@ class Question extends Model
     {
         $this->best_answer_id = $answer->id;
         $this->save();
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); // 'user_id', 'question_id');
+    }
+
+    public function getIsFavoritedAttribute()
+    {
+        return $this->favorites()->where('user_id', Auth::user()->id)->count() > 0;
+    }
+
+    public function getFavoritesCountAttribute()
+    {
+        return $this->favorites->count();
     }
 
 }
