@@ -78,9 +78,9 @@ class AnswersController extends Controller
      */
     public function destroy(Question $question, Answer $answer)
     {
-        if(Gate::denies('delete-answer', $question)){
-            \abort(403, "Acess denied");
-        }
+        // if(Gate::denies('delete-answer', $question)){
+        //     \abort(403, "Acess denied");
+        // }
         $answer->delete();
         return \back()->with("success", "Your answer has been deleted");
     }
