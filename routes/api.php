@@ -27,5 +27,5 @@ Route::middleware(['auth:api'])->group(function() {
     Route::get('/user', function(Request $request){
         return $request->user();
     });
-    Route::apiResource('/questions', 'Api\QuestionsController')->except('index');
+    Route::apiResource('questions', 'Api\QuestionsController')->except('index');
 });
