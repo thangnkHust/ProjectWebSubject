@@ -34,7 +34,7 @@ class QuestionsController extends Controller
         return \response()->json([
             'message' => "Your question has been submitted",
             'question' => new QuestionResource($question)
-        ]);
+        ], 200);
     }
 
     /**
