@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', 'Auth\LoginController@getToken');
 Route::post('/register', 'Auth\RegisterController@create');
 Route::get('/questions', 'Api\QuestionsController@index');
+Route::get('/questions/{question}/answers', 'Api\AnswersController@index');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -27,5 +28,6 @@ Route::middleware(['auth:api'])->group(function() {
     Route::get('/user', function(Request $request){
         return $request->user();
     });
-    Route::apiResource('/questions', 'Api\QuestionsController')->except('index');
+    Route::apiResource('questions', 'Api\QuestionsController')->except('index');
+    Route::apiResource('questions.answers', 'Api\AnswersController')->except('index');
 });

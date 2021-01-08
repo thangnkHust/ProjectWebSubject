@@ -61,7 +61,10 @@ class QuestionsController extends Controller
     public function update(Request $request, Question $question)
     {
         if(Gate::denies('update-question', $question)){
-            \abort(403, "Access denied");
+            // \abort(403, "Acess denied");
+            return \response()->json([
+                'message' => "Access denied"
+            ], 403);
         }
         $question->update($request->only('title', 'body'));
         return response()->json([
@@ -80,11 +83,14 @@ class QuestionsController extends Controller
     public function destroy(Question $question)
     {
         if(Gate::denies('delete-question', $question)){
-            \abort(403, "Acess denied");
+            // \abort(403, "Acess denied");
+            return \response()->json([
+                'message' => "Access denied"
+            ], 403);
         }
         $question->delete();
         return response()->json([
             'message' => "Your question has been deleted."
-        ]);
+        ], 200);
     }
 }
