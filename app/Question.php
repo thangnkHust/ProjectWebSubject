@@ -59,7 +59,7 @@ class Question extends Model
 
     public function getFavoritesCountAttribute()
     {
-        return $this->favorites->count();
+        return $this->favorites()->count();
     }
 
 }
