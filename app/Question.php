@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Question extends Model
 {
+    use VotableTrait;
+    
     protected $fillable = ['title', 'body'];
     public function user(){
         return $this->belongsTo(User::class);
@@ -44,6 +47,23 @@ class Question extends Model
     {
         $this->best_answer_id = $answer->id;
         $this->save();
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); // 'user_id', 'question_id');
+    }
+
+    public function getIsFavoritedAttribute()
+    {
+        if(Auth::user())
+            return $this->favorites()->where('user_id', Auth::user()->id)->count() > 0;
+        return false;
+    }
+
+    public function getFavoritesCountAttribute()
+    {
+        return $this->favorites()->count();
     }
 
 }
