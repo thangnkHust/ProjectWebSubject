@@ -25,9 +25,15 @@ Route::get('/questions/{question}/answers', 'Api\AnswersController@index');
 
 Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
 Route::middleware(['auth:api'])->group(function() {
+    // REturn current user
     Route::get('/user', function(Request $request){
         return $request->user();
     });
+    // For questions function
     Route::apiResource('questions', 'Api\QuestionsController')->except('index');
+    // For answers function
     Route::apiResource('questions.answers', 'Api\AnswersController')->except('index');
+    // For vote function
+    Route::post('/questions/{question}/vote', 'Api\VoteQuestionController');
+    Route::post('/answers/{answer}/vote', 'Api\VoteAnswerController');
 });

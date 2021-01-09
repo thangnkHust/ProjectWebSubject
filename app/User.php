@@ -89,6 +89,7 @@ class User extends Authenticatable
         $upVotes = (int) $question->upVotes()->sum('vote');
         $question->votes_count = $upVotes + $downVotes;
         $question->save();
+        return $question->votes_count;
     }
 
     public function voteAnswer(Answer $answer, $vote)
@@ -105,6 +106,7 @@ class User extends Authenticatable
         $upVotes = (int) $answer->upVotes()->sum('vote');
         $answer->votes_count = $upVotes + $downVotes;
         $answer->save();
+        return $answer->votes_count;
     }
 
 }
