@@ -13,7 +13,7 @@ class VoteAnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Answer $answer)
+    public function __invoke(Request $request, Answer $answer)
     {
         $vote = (int) request()->vote;
 
@@ -22,6 +22,6 @@ class VoteAnswerController extends Controller
         return response()->json([
             'message' => 'Thanks for the feedback',
             'votesCount' => $votesCount
-        ]);
+        ], 200);
     }
 }
