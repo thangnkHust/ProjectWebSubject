@@ -16,6 +16,6 @@ class VoteQuestionController extends Controller
         return response()->json([
             'message'    => 'Thanks for the feedback',
             'votesCount' => $votesCount
-        ]);
+        ], 200);
     }
 }
