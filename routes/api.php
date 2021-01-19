@@ -26,11 +26,11 @@ Route::get('/questions/{question}/answers', 'Api\AnswersController@index');
 // });
 
 Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
-Route::middleware(['auth:api'])->group(function() {
+Route::middleware(['auth:api', 'cors'])->group(function() {
     // REturn current user
     Route::get('/user', function(Request $request){
         return $request->user();
-    });
+    })->name('user');
     // For questions function
     Route::apiResource('questions', 'Api\QuestionsController')->except('index');
     // For answers function
@@ -42,4 +42,5 @@ Route::middleware(['auth:api'])->group(function() {
     Route::post('/answers/{answer}/accept', 'Api\AcceptAnswerController')->name('answers.accept');
     Route::post('/questions/{question}/favorites', 'Api\FavoritesController@store')->name('questions.favorite')->middleware('auth');
     Route::delete('/questions/{question}/favorites', 'Api\FavoritesController@destroy')->name('questions.unfavorite')->middleware('auth');
+    Route::get('/my-posts', 'Api\MyPostsController');
 });

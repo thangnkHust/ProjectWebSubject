@@ -87,6 +87,11 @@ class QuestionsController extends Controller
         if(Gate::denies('update-question', $question)){
             \abort(403, "Access denied");
         }
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ], );
         $question->update($request->only('title', 'body'));
         return \redirect('/questions')->with('success', 'Your question has been upadte');
     }
@@ -106,8 +111,8 @@ class QuestionsController extends Controller
         return \redirect('/questions')->with('success', 'Your question has been deleted');
     }
 
-    public function answers()
-    {
-        return $this->hasMany(Answer::class);
-    }
+    // public function answers()
+    // {
+    //     return $this->hasMany(Answer::class);
+    // }
 }

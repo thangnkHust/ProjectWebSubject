@@ -54,11 +54,14 @@ class Question extends Model
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); // 'user_id', 'question_id');
     }
 
+    public function isFavorited()
+    {
+        return $this->favorites()->where('user_id', request()->user()->id())->count() > 0;
+    }
+
     public function getIsFavoritedAttribute()
     {
-        if(Auth::user())
-            return $this->favorites()->where('user_id', Auth::user()->id)->count() > 0;
-        return false;
+        return $this->isFavorited();
     }
 
     public function getFavoritesCountAttribute()

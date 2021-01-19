@@ -66,6 +66,10 @@ class QuestionsController extends Controller
                 'message' => "Access denied"
             ], 403);
         }
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
         $question->update($request->only('title', 'body'));
         return response()->json([
             'message' => "Your question has been updated.",

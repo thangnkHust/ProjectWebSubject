@@ -14,7 +14,7 @@ class AnswersController extends Controller
 {
     public function index(Question $question)
     {
-        $answers = $question->answers()->with('user')->paginate(3);
+        $answers = $question->answers()->with('user')->get();
         return AnswerResource::collection($answers);
     }
     /**
@@ -76,9 +76,9 @@ class AnswersController extends Controller
      */
     public function destroy(Question $question, Answer $answer)
     {
-        // if(Gate::denies('delete-answer', $question)){
-        //     \abort(403, "Access denied");
-        // }
+        if(Gate::denies('delete-answer', $question)){
+            \abort(403, "Access denied");
+        }
         $answer->delete();
         return \response()->json([
             'message' => "Your answer has been deleted",

@@ -43,7 +43,7 @@ class Answer extends Model
         return $this->is_best ? 'vote-accepted' : '';
     }
 
-    public function getIsBestAttribute(Type $var = null)
+    public function getIsBestAttribute()
     {
         return $this->id === $this->question->best_answer_id;
     }
