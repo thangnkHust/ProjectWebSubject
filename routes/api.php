@@ -31,6 +31,8 @@ Route::middleware(['auth:api', 'cors'])->group(function() {
     Route::get('/user', function(Request $request){
         return $request->user();
     })->name('user');
+
+    Route::post('/change-profile', 'Api\UsersController@update');
     // For questions function
     Route::apiResource('questions', 'Api\QuestionsController')->except('index');
     // For answers function
