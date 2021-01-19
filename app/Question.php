@@ -56,7 +56,9 @@ class Question extends Model
 
     public function isFavorited()
     {
-        return $this->favorites()->where('user_id', request()->user()->id())->count() > 0;
+        if(Auth::check())
+            return $this->favorites()->where('user_id', request()->user()->id())->count() > 0;
+        return false;
     }
 
     public function getIsFavoritedAttribute()

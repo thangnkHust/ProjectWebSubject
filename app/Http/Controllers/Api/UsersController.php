@@ -38,8 +38,13 @@ class UsersController extends Controller
                 ]
             ], 422);
         }
+        User::where('id', Auth::user()->id)
+            ->update([
+                'name' => $request->name,
+                'password' => Hash::make($request->password)
+            ]);
         return \response()->json([
-            'data' => $request->all()
-        ]);
+            'message' => "Update profile successfuly"
+        ], 200);
     }
 }
