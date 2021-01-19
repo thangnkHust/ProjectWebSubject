@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\UserResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,12 @@ Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
 Route::middleware(['auth:api', 'cors'])->group(function() {
     // REturn current user
     Route::get('/user', function(Request $request){
-        return $request->user();
+        return response()->json([
+            'id' => $request->user()->id,
+            'name' => $request->user()->name,
+            'email' => $request->user()->email,
+            'avatar' => $request->user()->avatar,
+        ]);
     })->name('user');
 
     Route::post('/change-profile', 'Api\UsersController@update');
