@@ -28,16 +28,16 @@ class UsersController extends Controller
             ], 422);
         }
 
-        if($request->password === $request->old_password){
-            return \response()->json([
-                "message" =>  "The given data was invalid.",
-                "errors" =>  [
-                    "password" => [
-                        "The old password and new password is the same."
-                    ]
-                ]
-            ], 422);
-        }
+        // if($request->password === $request->old_password){
+        //     return \response()->json([
+        //         "message" =>  "The given data was invalid.",
+        //         "errors" =>  [
+        //             "password" => [
+        //                 "The old password and new password is the same."
+        //             ]
+        //         ]
+        //     ], 422);
+        // }
         User::where('id', Auth::user()->id)
             ->update([
                 'name' => $request->name,
