@@ -68,10 +68,12 @@ class User extends Authenticatable
                 'created_at' => $post->created_at->format('M d Y'),
             ];
             if($post instanceof Answer){
+                $item['slug'] = $post->question->id . "-" . $post->question->slug;
                 $item['type'] = 'A';
                 $item['title'] = $post->question->title;
                 $item['accepted'] = $post->question->best_answer_id === $post->id ? true : false;
             }elseif($post instanceof Question){
+                $item['slug'] = $post->id . '-' . $post->slug;
                 $item['type'] = 'Q';
                 $item['title'] = $post->title;
                 $item['accepted'] = (bool)$post->best_answer_id;
